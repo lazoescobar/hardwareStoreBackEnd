@@ -1,0 +1,10 @@
+server:
+  port: 8080
+  servlet:
+    contextPath: /api
+
+datasource:
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://127.0.0.1:3340/HardwareStore
+  username: pym
+  password: password
