@@ -1,25 +1,25 @@
 package com.hardwareStore.backEnd.jpaExample;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import com.hardwareStore.backEnd.dataSource.moduloPersona.model.DocumentoIndentidad;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.hardwareStore.backEnd.dataSource.moduloPersona.repository.*;
 
 import java.util.List;
 
 @RestController
 public class UserRest {
 
+    private final DocumentoIdentidadRepository documentoIdentidadRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
-
+    public UserRest(DocumentoIdentidadRepository documentoIdentidadRepository){
+        this.documentoIdentidadRepository = documentoIdentidadRepository;
+    }
 
     @GetMapping("/user")
     public String index(){
 
-        List<UserEntity> listUser = (List<UserEntity>) userRepository.findAll();
+        List<DocumentoIndentidad> documentsIdentidad = documentoIdentidadRepository.findAll();
         return "Hola mundo";
     }
 }
