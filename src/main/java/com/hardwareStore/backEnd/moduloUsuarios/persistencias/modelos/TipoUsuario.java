@@ -1,5 +1,7 @@
 package com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos;
 
+import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.Usuario;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,17 +17,17 @@ public class TipoUsuario {
     private String tipo;
 
     @OneToMany(mappedBy = "tipoUsuario", cascade = CascadeType.ALL)
-    private List<UsuarioEntidad> usuarioEntidads;
+    private List<Usuario> usuarios;
 
     @OneToMany(mappedBy = "tipoUsuario", cascade = CascadeType.ALL)
     private List<VisualizaEnFront> visualizacionesEnFront;
 
     public TipoUsuario(){}
 
-    public TipoUsuario(String id, String tipo, List<UsuarioEntidad> usuarioEntidads, List<VisualizaEnFront> visualizacionesEnFront) {
+    public TipoUsuario(String id, String tipo, List<Usuario> usuarios, List<VisualizaEnFront> visualizacionesEnFront) {
         this.id = id;
         this.tipo = tipo;
-        this.usuarioEntidads = usuarioEntidads;
+        this.usuarios = usuarios;
         this.visualizacionesEnFront = visualizacionesEnFront;
     }
 
@@ -45,12 +47,12 @@ public class TipoUsuario {
         this.tipo = tipo;
     }
 
-    public List<UsuarioEntidad> getUsuarios() {
-        return usuarioEntidads;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setUsuarios(List<UsuarioEntidad> usuarioEntidads) {
-        this.usuarioEntidads = usuarioEntidads;
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     public List<VisualizaEnFront> getVisualizacionesEnFront() {

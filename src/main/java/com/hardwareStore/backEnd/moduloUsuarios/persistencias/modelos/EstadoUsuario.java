@@ -15,14 +15,14 @@ public class EstadoUsuario {
     private String estado;
 
     @OneToMany(mappedBy = "estadoUsuario", cascade = CascadeType.ALL)
-    private List<UsuarioEntidad> usuarioEntidads;
+    private List<Usuario> usuarios;
 
     public EstadoUsuario(){}
 
-    public EstadoUsuario(String id, String estado, List<UsuarioEntidad> usuarioEntidads) {
+    public EstadoUsuario(String id, String estado, List<Usuario> usuarios) {
         this.id = id;
         this.estado = estado;
-        this.usuarioEntidads = usuarioEntidads;
+        this.usuarios = usuarios;
     }
 
     public String getId() {
@@ -41,11 +41,11 @@ public class EstadoUsuario {
         this.estado = estado;
     }
 
-    public List<UsuarioEntidad> getUsuarios() {
-        return usuarioEntidads;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setUsuarios(List<UsuarioEntidad> usuarioEntidads) {
-        this.usuarioEntidads = usuarioEntidads;
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 }

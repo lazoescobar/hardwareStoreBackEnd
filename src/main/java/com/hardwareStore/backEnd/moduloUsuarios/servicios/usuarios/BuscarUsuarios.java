@@ -1,7 +1,6 @@
 package com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios;
 
 import com.hardwareStore.backEnd.moduleSystem.servicios.SalidaBaseService;
-import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.UsuarioEntidad;
 import com.hardwareStore.backEnd.moduloUsuarios.persistencias.respositorios.UsuarioRepository;
 
 public class BuscarUsuarios {
@@ -25,15 +24,18 @@ public class BuscarUsuarios {
     //Logica
     public SalidaBuscarUsuarios logica(EntradaBuscarUsuarios entrada){
 
+
         Integer idUsuario = entrada.idUsuario;
         String nombreUsuario = entrada.nombre;
         SalidaBuscarUsuarios salida = new SalidaBuscarUsuarios();
+        /*
         if((idUsuario != null && idUsuario != 0) && (nombreUsuario != null && !nombreUsuario.isEmpty())){
-            UsuarioEntidad usuarioEntidad = usuarioRepository.findFirstByIdAndNombre(idUsuario, nombreUsuario);
+            UsuarioEntidad usuarioEntidad = usuarioRepository.findFirstByPass(nombreUsuario);
             if(usuarioEntidad == null){
 
             }
         }
+         */
 
 
 

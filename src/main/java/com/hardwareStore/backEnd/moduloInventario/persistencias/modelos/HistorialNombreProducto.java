@@ -1,7 +1,7 @@
 package com.hardwareStore.backEnd.moduloInventario.persistencias.modelos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.UsuarioEntidad;
+import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.Usuario;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -32,17 +32,17 @@ public class HistorialNombreProducto {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdUsuarioRegistro")
     @JsonIgnore
-    private UsuarioEntidad usuarioEntidad;
+    private Usuario usuario;
 
     public HistorialNombreProducto(){}
 
-    public HistorialNombreProducto(int id, String nombreAntiguo, String nombreActual, Date fechaRegistro, Producto producto, UsuarioEntidad usuarioEntidad) {
+    public HistorialNombreProducto(int id, String nombreAntiguo, String nombreActual, Date fechaRegistro, Producto producto, Usuario usuario) {
         this.id = id;
         this.nombreAntiguo = nombreAntiguo;
         this.nombreActual = nombreActual;
         this.fechaRegistro = fechaRegistro;
         this.producto = producto;
-        this.usuarioEntidad = usuarioEntidad;
+        this.usuario = usuario;
     }
 
     public int getId() {
@@ -85,11 +85,11 @@ public class HistorialNombreProducto {
         this.producto = producto;
     }
 
-    public UsuarioEntidad getUsuario() {
-        return usuarioEntidad;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuario(UsuarioEntidad usuarioEntidad) {
-        this.usuarioEntidad = usuarioEntidad;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

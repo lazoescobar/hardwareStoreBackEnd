@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "\"ModuloPersona.VisualizaEnFront\"")
+@Table(name = "\"ModuloUsuario.VisualizaEnFront\"")
 public class VisualizaEnFront {
 
     @Id

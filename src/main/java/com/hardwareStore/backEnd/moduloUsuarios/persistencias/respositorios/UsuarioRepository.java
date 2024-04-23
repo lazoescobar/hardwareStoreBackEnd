@@ -1,13 +1,13 @@
 package com.hardwareStore.backEnd.moduloUsuarios.persistencias.respositorios;
 
-import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.UsuarioEntidad;
+import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UsuarioRepository extends JpaRepository<UsuarioEntidad, Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-    UsuarioEntidad findFirstById(Integer id);
+    Usuario findFirstById(Integer id);
 
-    UsuarioEntidad findFirstByIdAndNombre(Integer id, String nombre);
+    Usuario findFirstByNombreAndPass(String nombre, String pass);
 }

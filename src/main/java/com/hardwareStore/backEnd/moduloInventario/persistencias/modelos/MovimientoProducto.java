@@ -1,7 +1,7 @@
 package com.hardwareStore.backEnd.moduloInventario.persistencias.modelos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.UsuarioEntidad;
+import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.Usuario;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -40,11 +40,11 @@ public class MovimientoProducto {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdUsuarioRegistro")
     @JsonIgnore
-    private UsuarioEntidad usuarioEntidad;
+    private Usuario usuario;
 
     public MovimientoProducto(){}
 
-    public MovimientoProducto(int id, Integer cantidad, Integer cantidadPrevia, Integer cantidadPosterior, Date fechaRegistro, Producto producto, TipoMovimientoProducto tipoMovimientoProducto, UsuarioEntidad usuarioEntidad) {
+    public MovimientoProducto(int id, Integer cantidad, Integer cantidadPrevia, Integer cantidadPosterior, Date fechaRegistro, Producto producto, TipoMovimientoProducto tipoMovimientoProducto, Usuario usuario) {
         this.id = id;
         this.cantidad = cantidad;
         this.cantidadPrevia = cantidadPrevia;
@@ -52,7 +52,7 @@ public class MovimientoProducto {
         this.fechaRegistro = fechaRegistro;
         this.producto = producto;
         this.tipoMovimientoProducto = tipoMovimientoProducto;
-        this.usuarioEntidad = usuarioEntidad;
+        this.usuario = usuario;
     }
 
     public int getId() {
@@ -111,11 +111,11 @@ public class MovimientoProducto {
         this.tipoMovimientoProducto = tipoMovimientoProducto;
     }
 
-    public UsuarioEntidad getUsuario() {
-        return usuarioEntidad;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuario(UsuarioEntidad usuarioEntidad) {
-        this.usuarioEntidad = usuarioEntidad;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

@@ -3,7 +3,7 @@ package com.hardwareStore.backEnd.moduloPersona.persistencias.modelos;
 import javax.persistence.*;
 import java.util.*;
 
-import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.UsuarioEntidad;
+import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.Usuario;
 
 @Entity
 @Table(name = "\"ModuloPersona.Persona\"")
@@ -27,20 +27,20 @@ public class Persona {
     private String fechaRegistro;
 
     @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
-    private UsuarioEntidad usuarioEntidad;
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL)
     private List<DocumentoIndentidad> documentosIdentidad;
 
     public Persona(){}
 
-    public Persona(int id, String nombres, String apellidoPaterno, String apellidoMaterno, String fechaRegistro, UsuarioEntidad usuarioEntidad, List<DocumentoIndentidad> documentosIdentidad) {
+    public Persona(int id, String nombres, String apellidoPaterno, String apellidoMaterno, String fechaRegistro, Usuario usuario, List<DocumentoIndentidad> documentosIdentidad) {
         this.id = id;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.fechaRegistro = fechaRegistro;
-        this.usuarioEntidad = usuarioEntidad;
+        this.usuario = usuario;
         this.documentosIdentidad = documentosIdentidad;
     }
 
@@ -84,12 +84,12 @@ public class Persona {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public UsuarioEntidad getUsuario() {
-        return usuarioEntidad;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuario(UsuarioEntidad usuarioEntidad) {
-        this.usuarioEntidad = usuarioEntidad;
+    public void setUsuario(Usuario usuarioEntidad) {
+        this.usuario = usuario;
     }
 
     public List<DocumentoIndentidad> getDocumentosIdentidad() {

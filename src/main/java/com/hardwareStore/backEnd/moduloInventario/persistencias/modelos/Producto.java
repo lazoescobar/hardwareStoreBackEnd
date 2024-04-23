@@ -1,7 +1,7 @@
 package com.hardwareStore.backEnd.moduloInventario.persistencias.modelos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.UsuarioEntidad;
+import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.Usuario;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,7 +18,7 @@ public class Producto {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdUsuarioRgistro")
     @JsonIgnore
-    private UsuarioEntidad usuarioEntidad;
+    private Usuario usuario;
 
     @Column(name = "FechaRegistro")
     private Date fechaRegistro;
@@ -36,9 +36,9 @@ public class Producto {
 
     public Producto(){}
 
-    public Producto(int id, UsuarioEntidad usuarioEntidad, Date fechaRegistro, Date fechaModificacion, TipoProducto tipoProducto, List<HistorialNombreProducto> historialNombreProductos) {
+    public Producto(int id, Usuario usuario, Date fechaRegistro, Date fechaModificacion, TipoProducto tipoProducto, List<HistorialNombreProducto> historialNombreProductos) {
         this.id = id;
-        this.usuarioEntidad = usuarioEntidad;
+        this.usuario = usuario;
         this.fechaRegistro = fechaRegistro;
         this.fechaModificacion = fechaModificacion;
         this.tipoProducto = tipoProducto;
@@ -53,12 +53,12 @@ public class Producto {
         this.id = id;
     }
 
-    public UsuarioEntidad getUsuario() {
-        return usuarioEntidad;
+    public Usuario Usuario() {
+        return usuario;
     }
 
-    public void setUsuario(UsuarioEntidad usuarioEntidad) {
-        this.usuarioEntidad = usuarioEntidad;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Date getFechaRegistro() {

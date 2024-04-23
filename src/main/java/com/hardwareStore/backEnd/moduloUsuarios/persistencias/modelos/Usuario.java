@@ -12,7 +12,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "\"ModuloUsuario.Usuario\"")
-public class UsuarioEntidad {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdUsuario")
@@ -43,7 +43,7 @@ public class UsuarioEntidad {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdEstadoUsuario")
     @JsonIgnore
-    private TipoUsuario estadoUsuario;
+    private EstadoUsuario estadoUsuario;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<MovimientoProducto> movimientoProductos;
@@ -54,9 +54,9 @@ public class UsuarioEntidad {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<HistorialNombreProducto> historialNombreProductos;
 
-    public UsuarioEntidad(){}
+    public Usuario(){}
 
-    public UsuarioEntidad(int id, String nombre, String pass, TipoUsuario tipoUsuario, Persona persona, Date fechaRegistro, Date fechaModificacion, TipoUsuario estadoUsuario, List<MovimientoProducto> movimientoProductos, List<Producto> productos, List<HistorialNombreProducto> historialNombreProductos) {
+    public Usuario(int id, String nombre, String pass, TipoUsuario tipoUsuario, Persona persona, Date fechaRegistro, Date fechaModificacion, EstadoUsuario estadoUsuario, List<MovimientoProducto> movimientoProductos, List<Producto> productos, List<HistorialNombreProducto> historialNombreProductos) {
         this.id = id;
         this.nombre = nombre;
         this.pass = pass;
@@ -126,11 +126,11 @@ public class UsuarioEntidad {
         this.fechaModificacion = fechaModificacion;
     }
 
-    public TipoUsuario getEstadoUsuario() {
+    public EstadoUsuario getEstadoUsuario() {
         return estadoUsuario;
     }
 
-    public void setEstadoUsuario(TipoUsuario estadoUsuario) {
+    public void setEstadoUsuario(EstadoUsuario estadoUsuario) {
         this.estadoUsuario = estadoUsuario;
     }
 
