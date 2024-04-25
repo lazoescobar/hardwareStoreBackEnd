@@ -33,16 +33,27 @@ public class LoginUsuario {
 
 
     public class SalidaLoginUsuario extends SalidaBaseService {
+
         @JsonInclude(JsonInclude.Include.NON_NULL)
-        List<InfoAcceso> accesos;
-        public void agregarAcceso(InfoAcceso acceso){
+        String nombreUsuario;
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        List<List<InfoAcceso>> accesos;
+        public void agregarAcceso(List<InfoAcceso> listaAccesos){
             if(accesos == null){
                 accesos = new ArrayList<>();
             }
-            accesos.add(acceso);
+            accesos.add(listaAccesos);
         }
 
-        public List<InfoAcceso> getAccesos() {
+        public String getNombreUsuario() {
+            return nombreUsuario;
+        }
+
+        public void setNombreUsuario(String nombreUsuario) {
+            this.nombreUsuario = nombreUsuario;
+        }
+
+        public List<List<InfoAcceso>> getAccesos() {
             return accesos;
         }
     }
@@ -55,7 +66,7 @@ public class LoginUsuario {
         String pass = entradaLogin.pass;
 
         String mensajeError = "usuario o pass no validos";
-        if((nombre != null && nombre.isEmpty()) && (pass != null && !pass.isEmpty())){
+        if((nombre == null || nombre.isEmpty()) && (pass == null || !pass.isEmpty())){
             salida.setEstado(HttpStatus.UNAUTHORIZED);
             salida.setMensaje(mensajeError);
             return salida;
@@ -80,12 +91,27 @@ public class LoginUsuario {
             return salida;
         }
 
+        salida.setNombreUsuario(usuarioEntidad.getNombre());
+
         List<VisualizaEnFront> visualizacionesEnFront = usuarioEntidad.getTipoUsuario().getVisualizacionesEnFront();
+
+        List<InfoAcceso> accesos = new ArrayList<>();
+        int cantidadVisualizaciones = visualizacionesEnFront.size();
+        int contador = 1;
+        System.out.println(cantidadVisualizaciones);
         for(VisualizaEnFront visualizaEnFront : visualizacionesEnFront){
             InfoAcceso infoAcceso = new InfoAcceso();
             infoAcceso.nombre = visualizaEnFront.getVisualiza();
-            infoAcceso.ruta = "";
-            salida.agregarAcceso(infoAcceso);
+            infoAcceso.ruta = visualizaEnFront.getUrlVisualiza();
+            accesos.add(infoAcceso);
+            if(accesos.size() < 2 && contador == cantidadVisualizaciones){
+                salida.agregarAcceso(accesos);
+            }
+            if(accesos.size() == 2){
+                salida.agregarAcceso(accesos);
+                accesos = new ArrayList<>();
+            }
+            contador ++;
         }
 
         salida.setEstado(HttpStatus.OK);

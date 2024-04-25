@@ -15,6 +15,9 @@ public class VisualizaEnFront {
     @Column(name = "Visualiza")
     private String visualiza;
 
+    @Column(name = "UrlVisualiza")
+    private String urlVisualiza;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IdTipoUsuario")
     @JsonIgnore
@@ -22,9 +25,10 @@ public class VisualizaEnFront {
 
     public VisualizaEnFront(){}
 
-    public VisualizaEnFront(int id, String visualiza, TipoUsuario tipoUsuario) {
+    public VisualizaEnFront(int id, String visualiza, String urlVisualiza, TipoUsuario tipoUsuario) {
         this.id = id;
         this.visualiza = visualiza;
+        this.urlVisualiza = urlVisualiza;
         this.tipoUsuario = tipoUsuario;
     }
 
@@ -38,6 +42,14 @@ public class VisualizaEnFront {
 
     public String getVisualiza() {
         return visualiza;
+    }
+
+    public String getUrlVisualiza() {
+        return urlVisualiza;
+    }
+
+    public void setUrlVisualiza(String urlVisualiza) {
+        this.urlVisualiza = urlVisualiza;
     }
 
     public void setVisualiza(String visualiza) {
