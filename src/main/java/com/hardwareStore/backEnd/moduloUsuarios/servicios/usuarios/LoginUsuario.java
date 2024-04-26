@@ -98,7 +98,6 @@ public class LoginUsuario {
         List<InfoAcceso> accesos = new ArrayList<>();
         int cantidadVisualizaciones = visualizacionesEnFront.size();
         int contador = 1;
-        System.out.println(cantidadVisualizaciones);
         for(VisualizaEnFront visualizaEnFront : visualizacionesEnFront){
             InfoAcceso infoAcceso = new InfoAcceso();
             infoAcceso.nombre = visualizaEnFront.getVisualiza();
