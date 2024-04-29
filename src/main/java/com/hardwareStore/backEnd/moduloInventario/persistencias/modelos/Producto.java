@@ -15,8 +15,11 @@ public class Producto {
     @Column(name = "IdProducto")
     private int id;
 
+    @Column(name = "NombreProducto")
+    private String nombre;
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "IdUsuarioRgistro")
+    @JoinColumn(name = "IdUsuarioRegistro")
     @JsonIgnore
     private Usuario usuario;
 
@@ -31,13 +34,16 @@ public class Producto {
     @JsonIgnore
     private TipoProducto tipoProducto;
 
+
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<HistorialNombreProducto> historialNombreProductos;
 
     public Producto(){}
 
-    public Producto(int id, Usuario usuario, Date fechaRegistro, Date fechaModificacion, TipoProducto tipoProducto, List<HistorialNombreProducto> historialNombreProductos) {
+    public Producto(int id, String nombre, Usuario usuario, Date fechaRegistro, Date fechaModificacion, TipoProducto tipoProducto, List<HistorialNombreProducto> historialNombreProductos) {
         this.id = id;
+        this.nombre = nombre;
         this.usuario = usuario;
         this.fechaRegistro = fechaRegistro;
         this.fechaModificacion = fechaModificacion;
@@ -51,6 +57,18 @@ public class Producto {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public Usuario Usuario() {

@@ -15,10 +15,10 @@ public class HistorialNombreProducto {
     @Column(name = "IdHistorialNombreProducto")
     private int id;
 
-    @Column(name = "IdNombreAntiguo")
+    @Column(name = "NombreAntiguo")
     private String nombreAntiguo;
 
-    @Column(name = "IdNombreActual")
+    @Column(name = "NombreActual")
     private String nombreActual;
 
     @Column(name = "FechaRegistro")
