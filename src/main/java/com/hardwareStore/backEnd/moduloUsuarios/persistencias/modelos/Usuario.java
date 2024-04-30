@@ -46,12 +46,15 @@ public class Usuario {
     private EstadoUsuario estadoUsuario;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<MovimientoProducto> movimientoProductos;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Producto> productos;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<HistorialNombreProducto> historialNombreProductos;
 
     public Usuario(){}

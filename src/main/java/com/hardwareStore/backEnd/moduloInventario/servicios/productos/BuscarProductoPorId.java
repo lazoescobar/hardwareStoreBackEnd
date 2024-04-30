@@ -4,14 +4,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.hardwareStore.backEnd.moduleSystem.servicios.SalidaBaseService;
 import com.hardwareStore.backEnd.moduloInventario.persistencias.modelos.Producto;
 import com.hardwareStore.backEnd.moduloInventario.persistencias.repositorios.ProductoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BuscarProductoPorId {
 
+    @Autowired
     private final ProductoRepository productoRepository;
 
+    @Autowired
     public BuscarProductoPorId(ProductoRepository productoRepository){
         this.productoRepository = productoRepository;
     }

@@ -5,15 +5,19 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3340/HardwareStore
+    url: jdbc:mysql://127.0.0.1:3341/HardwareStore
     username: pym
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
+    auto-commit: false
 
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        transaction:
+          rollback_on_commit_failure: true
+          flush_before_completion: true
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
