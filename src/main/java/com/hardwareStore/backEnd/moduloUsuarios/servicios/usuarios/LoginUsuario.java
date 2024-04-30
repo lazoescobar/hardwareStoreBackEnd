@@ -35,7 +35,14 @@ public class LoginUsuario {
     public class SalidaLoginUsuario extends SalidaBaseService {
 
         @JsonInclude(JsonInclude.Include.NON_NULL)
+        public Integer id;
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        public String tipo;
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         String nombreUsuario;
+
         @JsonInclude(JsonInclude.Include.NON_NULL)
         List<List<InfoAcceso>> accesos;
         public void agregarAcceso(List<InfoAcceso> listaAccesos){
@@ -43,6 +50,26 @@ public class LoginUsuario {
                 accesos = new ArrayList<>();
             }
             accesos.add(listaAccesos);
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getTipo() {
+            return tipo;
+        }
+
+        public void setTipo(String tipo) {
+            this.tipo = tipo;
+        }
+
+        public void setAccesos(List<List<InfoAcceso>> accesos) {
+            this.accesos = accesos;
         }
 
         public String getNombreUsuario() {
@@ -91,7 +118,9 @@ public class LoginUsuario {
             return salida;
         }
 
+        salida.setId(usuarioEntidad.getId());
         salida.setNombreUsuario(usuarioEntidad.getNombre());
+        salida.setTipo(usuarioEntidad.getTipoUsuario().getId());
 
         List<VisualizaEnFront> visualizacionesEnFront = usuarioEntidad.getTipoUsuario().getVisualizacionesEnFront();
 
