@@ -1,5 +1,6 @@
 package com.hardwareStore.backEnd.moduloInventario.servicios.productos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.hardwareStore.backEnd.moduleSystem.servicios.SalidaBaseService;
 import com.hardwareStore.backEnd.moduloInventario.persistencias.modelos.HistorialNombreProducto;
 import com.hardwareStore.backEnd.moduloInventario.persistencias.modelos.Producto;
@@ -40,9 +41,45 @@ public class CambiarNombreProducto {
         public String nuevoNombre;
     }
 
-    public SalidaBaseService logica(EntradaCambiarNombreProducto entrada){
 
-        SalidaBaseService salida = new SalidaBaseService();
+    public class InfoProducto extends Producto{
+        private String tipo;
+        private String descTipo;
+
+        public String getTipo() {
+            return tipo;
+        }
+
+        public void setTipo(String tipo) {
+            this.tipo = tipo;
+        }
+
+        public String getDescTipo() {
+            return descTipo;
+        }
+
+        public void setDescTipo(String descTipo) {
+            this.descTipo = descTipo;
+        }
+    }
+
+    public class SalidaambiarNombreProducto extends SalidaBaseService {
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        BuscarProductoPorId.InfoProducto infoProducto;
+
+        public BuscarProductoPorId.InfoProducto getInfoProducto() {
+            return infoProducto;
+        }
+
+        public void setInfoProducto(BuscarProductoPorId.InfoProducto infoProducto) {
+            this.infoProducto = infoProducto;
+        }
+    }
+
+    public SalidaambiarNombreProducto logica(EntradaCambiarNombreProducto entrada){
+
+        SalidaambiarNombreProducto salida = new SalidaambiarNombreProducto();
 
         SalidaBuscarUsuarioPorId servicioaBuscarUsuarioPorId = buscarUsuarioPorId.logica(entrada.idUsuario);
         if(servicioaBuscarUsuarioPorId.getErrores() > 0){
@@ -76,17 +113,22 @@ public class CambiarNombreProducto {
             return salida;
         }
 
-        transaccionEntidades(entrada, salida, producto, usuario);
+        boolean resultadoTransaccion = transaccionEntidades(entrada, salida, producto, usuario);
+        if(resultadoTransaccion){
+            BuscarProductoPorId.SalidaBuscarProductoPorId servicioBuscarProductoActualizadoPorId = buscarProductoPorId.Logica(entrada.idProducto);
+            if(servicioBuscarProductoActualizadoPorId.getErrores() == 0 ){
+                salida.setInfoProducto(servicioBuscarProductoActualizadoPorId.getInfoProducto());
+            }
+        }
 
         return salida;
     }
 
     @Transactional
-    private void transaccionEntidades(EntradaCambiarNombreProducto entrada, SalidaBaseService salida, Producto producto, Usuario usuario){
-
+    private boolean transaccionEntidades(EntradaCambiarNombreProducto entrada, SalidaBaseService salida, Producto producto, Usuario usuario){
+        boolean todoCorrecto = false;
         try{
             String nombreAntiguo = producto.getNombre();
-
             producto.setNombre(entrada.nuevoNombre);
             producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
             productoRepository.save(producto);
@@ -101,10 +143,12 @@ public class CambiarNombreProducto {
 
             salida.setEstado(HttpStatus.OK);
             salida.setMensaje("Nombre de producto actualizado correctamente");
+            todoCorrecto = true;
         }catch (Exception e){
             salida.setEstado(HttpStatus.BAD_REQUEST);
             salida.setMensaje("No se pudo actualizar nombre de producto");
             salida.setErrores(+1);
         }
+        return todoCorrecto;
     }
 }

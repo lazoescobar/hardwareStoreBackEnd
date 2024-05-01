@@ -20,17 +20,39 @@ public class BuscarProductoPorId {
     }
 
 
+    public class InfoProducto extends Producto{
+        private String tipo;
+        private String descTipo;
+
+        public String getTipo() {
+            return tipo;
+        }
+
+        public void setTipo(String tipo) {
+            this.tipo = tipo;
+        }
+
+        public String getDescTipo() {
+            return descTipo;
+        }
+
+        public void setDescTipo(String descTipo) {
+            this.descTipo = descTipo;
+        }
+    }
+
+
     public class SalidaBuscarProductoPorId extends SalidaBaseService {
 
         @JsonInclude(JsonInclude.Include.NON_NULL)
-        Producto producto;
+        InfoProducto infoProducto;
 
-        public Producto getProducto() {
-            return producto;
+        public InfoProducto getInfoProducto() {
+            return infoProducto;
         }
 
-        public void setProducto(Producto producto) {
-            this.producto = producto;
+        public void setInfoProducto(InfoProducto infoProducto) {
+            this.infoProducto = infoProducto;
         }
     }
 
@@ -55,9 +77,17 @@ public class BuscarProductoPorId {
             return salida;
         }
 
+        InfoProducto infoProducto = new InfoProducto();
+        infoProducto.setId(producto.getId());
+        infoProducto.setNombre(producto.getNombre());
+        infoProducto.setFechaRegistro(producto.getFechaRegistro());
+        infoProducto.setFechaModificacion(producto.getFechaModificacion());
+        infoProducto.setTipo(producto.getTipoProducto().getId());
+        infoProducto.setDescTipo(producto.getTipoProducto().getTipo());
+
         salida.setEstado(HttpStatus.OK);
         salida.setMensaje("Producto encontrado correctamente");
-        salida.setProducto(producto);
+        salida.setInfoProducto(infoProducto);
 
         return salida;
     }
