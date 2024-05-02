@@ -9,7 +9,7 @@ public class TipoMovimientoProducto {
 
     @Id
     @Column(name = "IdTipoMovimientoProducto")
-    private int id;
+    private String id;
 
     @Column(name = "TipoMovimientoProducto")
     private String tipo;
@@ -19,17 +19,17 @@ public class TipoMovimientoProducto {
 
     public TipoMovimientoProducto(){}
 
-    public TipoMovimientoProducto(int id, String tipo, List<MovimientoProducto> movimientoProductos) {
+    public TipoMovimientoProducto(String id, String tipo, List<MovimientoProducto> movimientoProductos) {
         this.id = id;
         this.tipo = tipo;
         this.movimientoProductos = movimientoProductos;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

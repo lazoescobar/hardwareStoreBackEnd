@@ -39,9 +39,13 @@ public class Producto {
     @JsonIgnore
     private List<HistorialNombreProducto> historialNombreProductos;
 
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<MovimientoProducto> movimientosProducto;
+
     public Producto(){}
 
-    public Producto(int id, String nombre, Usuario usuario, Date fechaRegistro, Date fechaModificacion, TipoProducto tipoProducto, List<HistorialNombreProducto> historialNombreProductos) {
+    public Producto(int id, String nombre, Usuario usuario, Date fechaRegistro, Date fechaModificacion, TipoProducto tipoProducto, List<HistorialNombreProducto> historialNombreProductos, List<MovimientoProducto> movimientosProducto) {
         this.id = id;
         this.nombre = nombre;
         this.usuario = usuario;
@@ -49,6 +53,7 @@ public class Producto {
         this.fechaModificacion = fechaModificacion;
         this.tipoProducto = tipoProducto;
         this.historialNombreProductos = historialNombreProductos;
+        this.movimientosProducto = movimientosProducto;
     }
 
     public int getId() {
@@ -109,5 +114,13 @@ public class Producto {
 
     public void setHistorialNombreProductos(List<HistorialNombreProducto> historialNombreProductos) {
         this.historialNombreProductos = historialNombreProductos;
+    }
+
+    public List<MovimientoProducto> getMovimientosProducto() {
+        return movimientosProducto;
+    }
+
+    public void setMovimientosProducto(List<MovimientoProducto> movimientosProducto) {
+        this.movimientosProducto = movimientosProducto;
     }
 }
