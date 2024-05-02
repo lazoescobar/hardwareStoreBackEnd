@@ -3,16 +3,11 @@ package com.hardwareStore.backEnd.moduloInventario.servicios.productos;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.hardwareStore.backEnd.moduleSystem.servicios.SalidaBaseService;
 import com.hardwareStore.backEnd.moduloInventario.persistencias.modelos.MovimientoProducto;
-import com.hardwareStore.backEnd.moduloInventario.persistencias.modelos.Producto;
 import com.hardwareStore.backEnd.moduloInventario.persistencias.repositorios.MovimientoProductoRepository;
 import com.hardwareStore.backEnd.moduloInventario.persistencias.repositorios.ProductoRepository;
-import com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios.BuscarUsuarioPorId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class ConsultarStockActualPorId {
