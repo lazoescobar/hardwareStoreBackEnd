@@ -49,11 +49,4 @@ public class Producto {
         return ResponseEntity.status(salida.getEstado()).body(salida);
     }
 
-    @PostMapping("/registrar-movimiento-producto/{id}")
-    public ResponseEntity<SalidaRegistrarNuevoIngresoEgresoProducto> actualizarStock( @PathVariable Integer id, @RequestBody EntadaRegistrarNuevoIngresoEgresoProducto entadaRegistrarNuevoIngresoEgresoProducto){
-        SalidaRegistrarNuevoIngresoEgresoProducto salida = registrarNuevoIngresoEgresoProducto.Logica(id, entadaRegistrarNuevoIngresoEgresoProducto);
-        return ResponseEntity.status(salida.getEstado()).body(salida);
-    }
-
-
 }
