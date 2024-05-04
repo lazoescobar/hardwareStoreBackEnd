@@ -130,18 +130,6 @@ public class RegistrarNuevoIngresoEgresoProducto {
             transaccion(salida, entrada, INGRESO, producto, tipoMovimientoProducto, usuario, stockActual);
         }
 
-        //EGRESO
-        if(Objects.equals(tipoMovimientoProducto.getId(), EGRESO)){
-            if(stockActual == 0 || stockActual < entrada.cantidad){
-                salida.setEstado(HttpStatus.BAD_REQUEST);
-                salida.setMensaje("Stock es menor a la cantidad ingresada en egreso");
-                salida.setErrores(+1);
-                return salida;
-            }
-
-            transaccion(salida, entrada, EGRESO, producto, tipoMovimientoProducto, usuario, stockActual);
-        }
-
         return salida;
     }
 

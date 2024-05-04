@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface MovimientoProductoRepository extends JpaRepository<MovimientoProducto, Integer> {
 
@@ -13,5 +15,6 @@ public interface MovimientoProductoRepository extends JpaRepository<MovimientoPr
     @Query(value = "SELECT mp FROM MovimientoProducto mp WHERE mp.id = (SELECT MAX(mp1.id) FROM MovimientoProducto mp1 WHERE mp1.producto.id = :id) ")
     MovimientoProducto findTopByProductoId(Integer id);
 
+    List<MovimientoProducto> findByProducto(Producto producto);
 }
 
