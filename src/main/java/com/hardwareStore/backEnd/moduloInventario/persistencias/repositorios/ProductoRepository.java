@@ -9,9 +9,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     Producto findFirstById(Integer id);
+
+    List<Producto> findByNombreLike(String nombre);
 }
