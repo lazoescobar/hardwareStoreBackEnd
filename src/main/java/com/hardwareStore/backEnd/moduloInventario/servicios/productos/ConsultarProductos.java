@@ -62,9 +62,9 @@ public class ConsultarProductos {
 
         List<Producto> productos = new ArrayList<>();
 
-        if((entrada.nombre == null || entrada.nombre.isEmpty()) && !entrada.todos){
+        if((entrada.nombre == null || entrada.nombre.isEmpty()) && (entrada.todos == null || !entrada.todos)){
             salida.setEstado(HttpStatus.NOT_FOUND);
-            salida.setMensaje("No existen productos registrados");
+            salida.setMensaje("No se encontaron productos");
             salida.setErrores(+1);
             return  salida;
         }
