@@ -31,6 +31,7 @@ public class ConsultarProductos {
     }
 
     public class ProductoConsulta {
+        public Integer id;
         public String nombre;
         public String fechaRegistroProducto;
         public String fechaUltimoIngreso;
@@ -96,6 +97,7 @@ public class ConsultarProductos {
         List<ProductoConsulta> productoConsultas = new ArrayList<>();
         for(Producto producto: productos){
             ProductoConsulta productoConsulta = new ProductoConsulta();
+            productoConsulta.id = producto.getId();
             productoConsulta.nombre = producto.getNombre();
             productoConsulta.fechaRegistroProducto = sdf.format(producto.getFechaRegistro());
 
