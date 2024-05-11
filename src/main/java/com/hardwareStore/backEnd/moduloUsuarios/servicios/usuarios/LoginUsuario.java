@@ -86,7 +86,7 @@ public class LoginUsuario {
     }
 
 
-    public SalidaLoginUsuario Logica(EntradaLoginUsuario entradaLogin){
+    public SalidaLoginUsuario logica(EntradaLoginUsuario entradaLogin){
 
         SalidaLoginUsuario salida = new SalidaLoginUsuario();
         String nombre = entradaLogin.uss;

@@ -1,6 +1,7 @@
 package com.hardwareStore.backEnd.moduloUsuarios.api;
 
-
+import com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios.ConsultaUsuarios;
+import com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios.ConsultaUsuarios.*;
 import com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios.LoginUsuario.*;
 import com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios.LoginUsuario;
 import org.springframework.http.ResponseEntity;
@@ -10,24 +11,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("modulo-usuario/")
+@RequestMapping("modulo-usuario/usuario")
 public class Usuario {
 
     private final LoginUsuario loginUsuario;
-    public Usuario(LoginUsuario loginUsuario){
+    private final ConsultaUsuarios consultaUsuarios;
+    public Usuario(LoginUsuario loginUsuario,
+                   ConsultaUsuarios consultaUsuarios){
         this.loginUsuario = loginUsuario;
+        this.consultaUsuarios = consultaUsuarios;
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody EntradaLoginUsuario entradaLoginUsuario){
-        SalidaLoginUsuario salidaLoginUsuario = loginUsuario.Logica(entradaLoginUsuario);
+        SalidaLoginUsuario salidaLoginUsuario = loginUsuario.logica(entradaLoginUsuario);
         return ResponseEntity.status(salidaLoginUsuario.getEstado()).body(salidaLoginUsuario);
     }
 
 
-    @PostMapping("registrar")
-    public ResponseEntity<Object> registrar(){
-
-        return ResponseEntity.status(400).body(null);
+    @PostMapping("/consulta-usuarios")
+    public ResponseEntity<SalidaConsultarUsuarios> consultaUsuarios(@RequestBody EntradaConsultarUsuarios entradaConsultarUsuarios){
+        SalidaConsultarUsuarios salida = consultaUsuarios.logica(entradaConsultarUsuarios);
+        return ResponseEntity.status(salida.getEstado()).body(salida);
     }
 }
