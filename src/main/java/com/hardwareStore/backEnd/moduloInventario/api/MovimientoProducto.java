@@ -23,7 +23,7 @@ public class MovimientoProducto {
 
     @PostMapping("/registrar-nuevo-movimiento/{idProducto}")
     public ResponseEntity<SalidaRegistrarNuevoIngresoEgresoProducto> nuevoIngreso(@PathVariable Integer idProducto, @RequestBody EntadaRegistrarNuevoIngresoEgresoProducto entadaRegistrarNuevoIngresoEgresoProducto){
-        SalidaRegistrarNuevoIngresoEgresoProducto salida = registrarNuevoIngresoEgresoProducto.Logica(idProducto, entadaRegistrarNuevoIngresoEgresoProducto);
+        SalidaRegistrarNuevoIngresoEgresoProducto salida = registrarNuevoIngresoEgresoProducto.logica(idProducto, entadaRegistrarNuevoIngresoEgresoProducto);
         return ResponseEntity.status(salida.getEstado()).body(salida);
     }
 

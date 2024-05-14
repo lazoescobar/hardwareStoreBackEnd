@@ -1,5 +1,6 @@
 package com.hardwareStore.backEnd.moduloInventario.api;
 
+import com.hardwareStore.backEnd.moduleSystem.servicios.SalidaBaseService;
 import com.hardwareStore.backEnd.moduloInventario.servicios.productos.*;
 import com.hardwareStore.backEnd.moduloInventario.servicios.productos.BuscarProductoPorId.*;
 import com.hardwareStore.backEnd.moduloInventario.servicios.productos.CambiarNombreProducto.*;
@@ -7,6 +8,8 @@ import com.hardwareStore.backEnd.moduloInventario.servicios.productos.ConsultarP
 import com.hardwareStore.backEnd.moduloInventario.servicios.productos.ConsultarStockActualPorId.*;
 import com.hardwareStore.backEnd.moduloInventario.servicios.productos.ConsultaProductoPorNombre;
 import com.hardwareStore.backEnd.moduloInventario.servicios.productos.ConsultaProductoPorNombre.*;
+import com.hardwareStore.backEnd.moduloInventario.servicios.productos.RegistrarNuevoProducto;
+import com.hardwareStore.backEnd.moduloInventario.servicios.productos.RegistrarNuevoProducto.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,17 +22,20 @@ public class Producto {
     private final ConsultarStockActualPorId consultarStockActualPorId;
     private final ConsultarProductos consultarProductos;
     private final ConsultaProductoPorNombre consultaProductoPorNombre;
+    private final RegistrarNuevoProducto registrarNuevoProducto;
 
     public Producto(BuscarProductoPorId buscarProductoPorId,
                     CambiarNombreProducto cambiarNombreProducto,
                     ConsultarStockActualPorId consultarStockActualPorId,
                     ConsultarProductos consultarProductos,
-                    ConsultaProductoPorNombre consultaProductoPorNombre){
+                    ConsultaProductoPorNombre consultaProductoPorNombre,
+                    RegistrarNuevoProducto registrarNuevoProducto){
         this.buscarProductoPorId = buscarProductoPorId;
         this.cambiarNombreProducto = cambiarNombreProducto;
         this.consultarStockActualPorId = consultarStockActualPorId;
         this.consultarProductos = consultarProductos;
         this.consultaProductoPorNombre = consultaProductoPorNombre;
+        this.registrarNuevoProducto = registrarNuevoProducto;
     }
 
     @GetMapping("/informacion/{id}")
@@ -62,5 +68,12 @@ public class Producto {
         SalidaConsultaProductoPorNombre salida = consultaProductoPorNombre.logica(entradaConsultaProductoPorNombre);
         return ResponseEntity.status(salida.getEstado()).body(salida);
     }
+
+    @PostMapping("/nuevo-producto")
+    public ResponseEntity<SalidaBaseService> registrarNuevoProducto(@RequestBody EntradaRegistrarNuevoProducto entradaRegistrarNuevoProducto){
+        SalidaBaseService salida = registrarNuevoProducto.logica(entradaRegistrarNuevoProducto);
+        return ResponseEntity.status(salida.getEstado()).body(salida);
+    }
+
 
 }

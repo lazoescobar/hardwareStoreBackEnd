@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Objects;
@@ -63,7 +64,7 @@ public class RegistrarNuevoIngresoEgresoProducto {
     }
 
 
-    public SalidaRegistrarNuevoIngresoEgresoProducto Logica(Integer idProducto, EntadaRegistrarNuevoIngresoEgresoProducto entrada){
+    public SalidaRegistrarNuevoIngresoEgresoProducto logica(Integer idProducto, EntadaRegistrarNuevoIngresoEgresoProducto entrada){
 
         SalidaRegistrarNuevoIngresoEgresoProducto salida = new SalidaRegistrarNuevoIngresoEgresoProducto();
 
@@ -134,6 +135,7 @@ public class RegistrarNuevoIngresoEgresoProducto {
     }
 
 
+    @Transactional
     public void transaccion(SalidaRegistrarNuevoIngresoEgresoProducto salida, EntadaRegistrarNuevoIngresoEgresoProducto entrada,
                             String tipoMovimiento, Producto producto, TipoMovimientoProducto tipoMovimientoProducto, Usuario usuario, Integer stockActual){
 
@@ -154,6 +156,7 @@ public class RegistrarNuevoIngresoEgresoProducto {
         }catch (Exception e){
             salida.setEstado(HttpStatus.BAD_REQUEST);
             salida.setMensaje("Problemas al registrar movimiento " + tipoMovimientoProducto.getTipo());
+            salida.setErrores(+1);
         }
     }
 }
