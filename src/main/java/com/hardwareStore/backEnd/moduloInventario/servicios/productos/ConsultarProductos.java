@@ -80,7 +80,7 @@ public class ConsultarProductos {
 
 
         if(!busquedaRealizada){
-            productos.addAll(productoRepository.findByNombreLike(entrada.nombre));
+            productos.addAll(productoRepository.findByCaseInsensitivNombre(entrada.nombre));
             if(!productos.isEmpty()){
                 existenProductos = true;
             }

@@ -3,10 +3,12 @@ package com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.hardwareStore.backEnd.moduleSystem.servicios.SalidaBaseService;
 import com.hardwareStore.backEnd.moduloUsuarios.persistencias.respositorios.UsuarioRepository;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 
+@Service
 public class ConsultaUsuarios {
 
     private UsuarioRepository usuarioRepository;

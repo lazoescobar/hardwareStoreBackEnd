@@ -1,13 +1,12 @@
 package com.hardwareStore.backEnd.moduloInventario.api;
 
-import com.hardwareStore.backEnd.moduloInventario.servicios.productos.BuscarProductoPorId;
+import com.hardwareStore.backEnd.moduloInventario.servicios.productos.*;
 import com.hardwareStore.backEnd.moduloInventario.servicios.productos.BuscarProductoPorId.*;
-import com.hardwareStore.backEnd.moduloInventario.servicios.productos.CambiarNombreProducto;
 import com.hardwareStore.backEnd.moduloInventario.servicios.productos.CambiarNombreProducto.*;
-import com.hardwareStore.backEnd.moduloInventario.servicios.productos.ConsultarProductos;
 import com.hardwareStore.backEnd.moduloInventario.servicios.productos.ConsultarProductos.*;
-import com.hardwareStore.backEnd.moduloInventario.servicios.productos.ConsultarStockActualPorId;
 import com.hardwareStore.backEnd.moduloInventario.servicios.productos.ConsultarStockActualPorId.*;
+import com.hardwareStore.backEnd.moduloInventario.servicios.productos.ConsultaProductoPorNombre;
+import com.hardwareStore.backEnd.moduloInventario.servicios.productos.ConsultaProductoPorNombre.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,15 +18,18 @@ public class Producto {
     private final CambiarNombreProducto cambiarNombreProducto;
     private final ConsultarStockActualPorId consultarStockActualPorId;
     private final ConsultarProductos consultarProductos;
+    private final ConsultaProductoPorNombre consultaProductoPorNombre;
 
     public Producto(BuscarProductoPorId buscarProductoPorId,
                     CambiarNombreProducto cambiarNombreProducto,
                     ConsultarStockActualPorId consultarStockActualPorId,
-                    ConsultarProductos consultarProductos){
+                    ConsultarProductos consultarProductos,
+                    ConsultaProductoPorNombre consultaProductoPorNombre){
         this.buscarProductoPorId = buscarProductoPorId;
         this.cambiarNombreProducto = cambiarNombreProducto;
         this.consultarStockActualPorId = consultarStockActualPorId;
         this.consultarProductos = consultarProductos;
+        this.consultaProductoPorNombre = consultaProductoPorNombre;
     }
 
     @GetMapping("/informacion/{id}")
@@ -50,8 +52,14 @@ public class Producto {
     }
 
     @PostMapping("/consulta-productos")
-    public ResponseEntity<SalidaConsultarProductos> obtenerStockActual(@RequestBody EntradaConsultarProductos entradaConsultarProductos){
+    public ResponseEntity<SalidaConsultarProductos> consultaProductos(@RequestBody EntradaConsultarProductos entradaConsultarProductos){
         SalidaConsultarProductos salida = consultarProductos.Logica(entradaConsultarProductos);
+        return ResponseEntity.status(salida.getEstado()).body(salida);
+    }
+
+    @PostMapping("/consulta-productos-por-nombre")
+    public ResponseEntity<SalidaConsultaProductoPorNombre> consultaProductosPorNombre(@RequestBody EntradaConsultaProductoPorNombre entradaConsultaProductoPorNombre){
+        SalidaConsultaProductoPorNombre salida = consultaProductoPorNombre.logica(entradaConsultaProductoPorNombre);
         return ResponseEntity.status(salida.getEstado()).body(salida);
     }
 
