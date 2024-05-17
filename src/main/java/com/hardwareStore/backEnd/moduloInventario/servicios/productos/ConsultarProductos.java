@@ -37,6 +37,8 @@ public class ConsultarProductos {
         public String fechaUltimoIngreso;
         public String fechaUltimoEngreso;
         public Integer stockActual;
+        public String tipo;
+
     }
 
 
@@ -100,6 +102,7 @@ public class ConsultarProductos {
             productoConsulta.id = producto.getId();
             productoConsulta.nombre = producto.getNombre();
             productoConsulta.fechaRegistroProducto = sdf.format(producto.getFechaRegistro());
+            productoConsulta.tipo = producto.getTipoProducto().getId();
 
             List<MovimientoProducto> movimientosProducto = producto.getMovimientosProducto();
 
