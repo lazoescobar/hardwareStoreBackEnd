@@ -182,9 +182,7 @@ public class ConsultarProductos {
                 salida.setErrores(+1);
                 return  salida;
             }
-            else{
-                salida.setProductos(productosFiltrados);
-            }
+            salida.setProductos(productosFiltrados);
         }
         else{
             salida.setProductos(productoConsultas);
