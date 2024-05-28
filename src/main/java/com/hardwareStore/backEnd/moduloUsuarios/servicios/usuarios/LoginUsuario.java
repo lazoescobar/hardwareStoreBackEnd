@@ -106,7 +106,7 @@ public class LoginUsuario {
             return salida;
         }
 
-        if(Objects.equals(usuarioEntidad.getEstadoUsuario().getEstado(), "BLO")){
+        if(Objects.equals(usuarioEntidad.getEstadoUsuario().getId(), "BLO")){
             salida.setEstado(HttpStatus.UNAUTHORIZED);
             salida.setMensaje("usuario con estado BLOQUEADO");
             return salida;

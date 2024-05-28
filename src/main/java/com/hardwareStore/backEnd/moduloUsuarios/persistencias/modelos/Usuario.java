@@ -21,6 +21,7 @@ public class Usuario {
     @Column(name = "NombreUsuario")
     private String nombre;
 
+    @JsonIgnore
     @Column(name = "Pass")
     private String pass;
 
