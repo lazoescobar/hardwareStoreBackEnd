@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EstadoDocumentoRepository extends JpaRepository<EstadoDocumento, String>{
 
+    EstadoDocumento findFirstById(String id);
 
 }

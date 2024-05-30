@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface DocumentoIdentidadRepository extends JpaRepository<DocumentoIndentidad, String> {
 
-    List<DocumentoIndentidad> findByPersonaId(Integer id);
+    DocumentoIndentidad findByNumero(String numeroDocumento);
 
 }

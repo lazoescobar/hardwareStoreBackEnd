@@ -1,6 +1,7 @@
 package com.hardwareStore.backEnd.moduloPersona.persistencias.modelos;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.*;
 
 import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.Usuario;
@@ -24,7 +25,7 @@ public class Persona {
     private String apellidoMaterno;
 
     @Column(name = "FechaRegistro")
-    private String fechaRegistro;
+    private Date fechaRegistro;
 
     @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
     private Usuario usuario;
@@ -34,7 +35,7 @@ public class Persona {
 
     public Persona(){}
 
-    public Persona(int id, String nombres, String apellidoPaterno, String apellidoMaterno, String fechaRegistro, Usuario usuario, List<DocumentoIndentidad> documentosIdentidad) {
+    public Persona(int id, String nombres, String apellidoPaterno, String apellidoMaterno, Date fechaRegistro, Usuario usuario, List<DocumentoIndentidad> documentosIdentidad) {
         this.id = id;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
@@ -42,6 +43,13 @@ public class Persona {
         this.fechaRegistro = fechaRegistro;
         this.usuario = usuario;
         this.documentosIdentidad = documentosIdentidad;
+    }
+
+    public Persona(String nombres, String apellidoPaterno, String apellidoMaterno, Date fechaRegistro) {
+        this.nombres = nombres;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.fechaRegistro = fechaRegistro;
     }
 
     public int getId() {
@@ -76,11 +84,11 @@ public class Persona {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public String getFechaRegistro() {
+    public Date getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(String fechaRegistro) {
+    public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 

@@ -4,4 +4,6 @@ import com.hardwareStore.backEnd.moduloUsuarios.persistencias.modelos.EstadoUsua
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EstadoUsuarioRepository extends JpaRepository<EstadoUsuario, String> {
+
+    EstadoUsuario findFirstById(String id);
 }

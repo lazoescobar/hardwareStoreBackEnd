@@ -8,4 +8,5 @@ import org.springframework.stereotype.Service;
 @Repository
 public interface TipoUsuarioRepository extends JpaRepository<TipoUsuario, String> {
 
+    TipoUsuario findFirsttById(String id);
 }

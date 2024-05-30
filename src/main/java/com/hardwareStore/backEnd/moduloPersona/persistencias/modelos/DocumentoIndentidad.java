@@ -41,6 +41,13 @@ public class DocumentoIndentidad implements Serializable {
         this.estadoDocumento = estadoDocumento;
     }
 
+    public DocumentoIndentidad(String numero, Persona persona, TipoDocumento tipoDocumento, EstadoDocumento estadoDocumento) {
+        this.numero = numero;
+        this.persona = persona;
+        this.tipoDocumento = tipoDocumento;
+        this.estadoDocumento = estadoDocumento;
+    }
+
     public int getId() {
         return id;
     }

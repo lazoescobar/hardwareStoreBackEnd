@@ -13,6 +13,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     Usuario findFirstById(Integer id);
 
+    Usuario findFirstByNombre(String nombre);
+
     Usuario findFirstByNombreAndPass(String nombre, String pass);
 
     @Query("SELECT u FROM Usuario u WHERE LOWER(u.nombre) LIKE LOWER(concat('%', :nombre, '%'))")

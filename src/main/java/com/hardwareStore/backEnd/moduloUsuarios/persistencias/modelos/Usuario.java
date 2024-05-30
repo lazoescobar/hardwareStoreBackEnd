@@ -74,6 +74,16 @@ public class Usuario {
         this.historialNombreProductos = historialNombreProductos;
     }
 
+    public Usuario(String nombre, String pass, TipoUsuario tipoUsuario, Persona persona, Date fechaRegistro, Date fechaModificacion, EstadoUsuario estadoUsuario) {
+        this.nombre = nombre;
+        this.pass = pass;
+        this.tipoUsuario = tipoUsuario;
+        this.persona = persona;
+        this.fechaRegistro = fechaRegistro;
+        this.fechaModificacion = fechaModificacion;
+        this.estadoUsuario = estadoUsuario;
+    }
+
     public int getId() {
         return id;
     }
