@@ -16,7 +16,7 @@ public interface MovimientoProductoRepository extends JpaRepository<MovimientoPr
     @Query(value = "SELECT mp FROM MovimientoProducto mp WHERE mp.id = (SELECT MAX(mp1.id) FROM MovimientoProducto mp1 WHERE mp1.producto.id = :id) ")
     MovimientoProducto findTopByProductoId(Integer id);
     List<MovimientoProducto> findByProducto(Producto producto);
-    @Query("SELECT m FROM MovimientoProducto m WHERE m.fechaRegistro >= :fechaDesde AND m.fechaRegistro <= :fechaHasta")
+    @Query("SELECT m FROM MovimientoProducto m WHERE DATE(m.fechaRegistro) BETWEEN :fechaDesde AND :fechaHasta")
     List<MovimientoProducto> findByFechaRegistroBetweenInclusive(@Param("fechaDesde") Date fechaDesde, @Param("fechaHasta") Date fechaHasta);
 }
 
