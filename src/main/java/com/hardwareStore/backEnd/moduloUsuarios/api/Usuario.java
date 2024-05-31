@@ -8,6 +8,8 @@ import com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios.ConsultaUsuar
 import com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios.LoginUsuario.*;
 import com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios.RegistrarNuevoUsuario;
 import com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios.RegistrarNuevoUsuario.*;
+import com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios.DesactivarUsuario;
+import com.hardwareStore.backEnd.moduloUsuarios.servicios.usuarios.DesactivarUsuario.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,16 +22,19 @@ public class Usuario {
     private final BuscarUsuarioPorId buscarUsuarioPorId;
     private final CambiarPassword cambiarPassword;
     private final RegistrarNuevoUsuario registrarNuevoUsuario;
+    private final DesactivarUsuario desactivarUsuario;
     public Usuario(LoginUsuario loginUsuario,
                    ConsultaUsuarios consultaUsuarios,
                    BuscarUsuarioPorId buscarUsuarioPorId,
                    CambiarPassword cambiarPassword,
-                   RegistrarNuevoUsuario registrarNuevoUsuario){
+                   RegistrarNuevoUsuario registrarNuevoUsuario,
+                   DesactivarUsuario desactivarUsuario){
         this.loginUsuario = loginUsuario;
         this.consultaUsuarios = consultaUsuarios;
         this.buscarUsuarioPorId = buscarUsuarioPorId;
         this.cambiarPassword = cambiarPassword;
         this.registrarNuevoUsuario = registrarNuevoUsuario;
+        this.desactivarUsuario = desactivarUsuario;
     }
 
     @PostMapping("/login")
@@ -59,6 +64,12 @@ public class Usuario {
     @PostMapping("/registrar")
     public ResponseEntity<SalidaBaseService> registrar(@RequestBody EntradaRegistrarNuevoUsuario entradaRegistrarNuevoUsuario){
         SalidaBaseService salida = registrarNuevoUsuario.logica(entradaRegistrarNuevoUsuario);
+        return ResponseEntity.status(salida.getEstado()).body(salida);
+    }
+
+    @PostMapping("/desactivar")
+    public ResponseEntity<SalidaBaseService> desactivar(@RequestBody EntradaDesactivarUsuario entradaDesactivarUsuario){
+        SalidaBaseService salida = desactivarUsuario.logica(entradaDesactivarUsuario);
         return ResponseEntity.status(salida.getEstado()).body(salida);
     }
 }

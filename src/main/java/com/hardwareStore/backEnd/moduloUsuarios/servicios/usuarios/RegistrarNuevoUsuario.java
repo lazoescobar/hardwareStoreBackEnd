@@ -142,7 +142,6 @@ public class RegistrarNuevoUsuario {
             Usuario usuarioRegistrado = usuarioRepository.saveAndFlush(usuario);
             salidaBaseService.setEstado(HttpStatus.OK);
             salidaBaseService.setMensaje("Usuario " + entradaRegistrarNuevoUsuario.nombreUsuario + " registrado correctemnte");
-            salidaBaseService.setErrores(+1);
         }catch (Exception e){
             salidaBaseService.setEstado(HttpStatus.BAD_REQUEST);
             salidaBaseService.setMensaje("Problemas al registrar nuevo usuario");
